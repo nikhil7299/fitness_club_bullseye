@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { View } from './components/View';
 import './App.css';
 
-// getting the values of local storage
 const getDatafromLS = () => {
   const data = localStorage.getItem('books');
   if (data) {
@@ -15,18 +14,15 @@ const getDatafromLS = () => {
 
 export const App = () => {
 
-  // main array of objects state || books state || books array of objects
   const [books, setbooks] = useState(getDatafromLS());
 
-  // input field states
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [isbn, setIsbn] = useState('');
 
-  // form submit event
+
   const handleAddBookSubmit = (e) => {
     e.preventDefault();
-    // creating an object
     let book = {
       title,
       author,
@@ -38,7 +34,7 @@ export const App = () => {
     setIsbn('');
   }
 
-  // delete book from LS
+
   const deleteBook = (isbn) => {
     const filteredBooks = books.filter((element, index) => {
       return element.isbn !== isbn
@@ -46,7 +42,7 @@ export const App = () => {
     setbooks(filteredBooks);
   }
 
-  // saving data to local storage
+
   useEffect(() => {
     localStorage.setItem('books', JSON.stringify(books));
   }, [books])
